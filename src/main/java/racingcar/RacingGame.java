@@ -17,9 +17,13 @@ public class RacingGame {
         validateCarNames(carNamesInput);
         validateRaceAttempts(raceAttempts);
         initializeCars(carNamesInput);
+
         for (int i = 0; i < raceAttempts; i++) {
             moveCars();
         }
+
+        List<String> winners = getWinners();
+        System.out.println("최종 우승자 : " + String.join(", ", winners));
     }
 
     private String inputCarNames() {
@@ -69,5 +73,16 @@ public class RacingGame {
 
     private boolean isMovable() {
         return Randoms.pickNumberInRange(0, 9) >= 4;
+    }
+
+    private List<String> getWinners() {
+        int maxPosition = carPositions.stream().max(Integer::compare).orElse(0);
+        List<String> winners = new ArrayList<>();
+        for (int i = 0; i < carNames.size(); i++) {
+            if (carPositions.get(i) == maxPosition) {
+                winners.add(carNames.get(i));
+            }
+        }
+        return winners;
     }
 }
