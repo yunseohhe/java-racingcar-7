@@ -1,16 +1,21 @@
 package racingcar;
 
 import camp.nextstep.edu.missionutils.Console;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class RacingGame {
+    private List<String> carNames;
+    private List<Integer> carPositions;
 
     public void start() {
         String carNamesInput = inputCarNames();
         int raceAttempts = inputRaceAttempts();
         validateCarNames(carNamesInput);
         validateRaceAttempts(raceAttempts);
+        initializeCars(carNamesInput);
     }
 
     private String inputCarNames() {
@@ -39,6 +44,14 @@ public class RacingGame {
     private void validateRaceAttempts(int raceAttempts) {
         if (raceAttempts <= 0) {
             throw new IllegalArgumentException("시도 횟수는 1 이상이어야 합니다.");
+        }
+    }
+
+    private void initializeCars(String carNamesInput) {
+        carNames = Arrays.asList(carNamesInput.split(","));
+        carPositions = new ArrayList<>();
+        for (int i = 0; i < carNames.size(); i++) {
+            carPositions.add(0);
         }
     }
 }
