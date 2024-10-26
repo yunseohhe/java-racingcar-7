@@ -1,6 +1,7 @@
 package racingcar;
 
 import camp.nextstep.edu.missionutils.Console;
+import camp.nextstep.edu.missionutils.Randoms;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,6 +17,9 @@ public class RacingGame {
         validateCarNames(carNamesInput);
         validateRaceAttempts(raceAttempts);
         initializeCars(carNamesInput);
+        for (int i = 0; i < raceAttempts; i++) {
+            moveCars();
+        }
     }
 
     private String inputCarNames() {
@@ -53,5 +57,17 @@ public class RacingGame {
         for (int i = 0; i < carNames.size(); i++) {
             carPositions.add(0);
         }
+    }
+
+    private void moveCars() {
+        for (int i = 0; i < carPositions.size(); i++) {
+            if (isMovable()) {
+                carPositions.set(i, carPositions.get(i) + 1);
+            }
+        }
+    }
+
+    private boolean isMovable() {
+        return Randoms.pickNumberInRange(0, 9) >= 4;
     }
 }
