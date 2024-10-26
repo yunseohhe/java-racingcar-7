@@ -20,10 +20,10 @@ public class RacingGame {
 
         for (int i = 0; i < raceAttempts; i++) {
             moveCars();
+            printRaceResults();
         }
 
-        List<String> winners = getWinners();
-        System.out.println("최종 우승자 : " + String.join(", ", winners));
+        printWinners();
     }
 
     private String inputCarNames() {
@@ -84,5 +84,17 @@ public class RacingGame {
             }
         }
         return winners;
+    }
+
+    private void printRaceResults() {
+        for (int i = 0; i < carNames.size(); i++) {
+            System.out.println(carNames.get(i) + " : " + "-".repeat(carPositions.get(i)));
+        }
+        System.out.println();
+    }
+
+    private void printWinners() {
+        List<String> winners = getWinners();
+        System.out.println("최종 우승자 : " + String.join(", ", winners));
     }
 }
